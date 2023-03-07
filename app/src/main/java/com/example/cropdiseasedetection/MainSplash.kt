@@ -15,17 +15,18 @@ class MainSplash : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_splash)
 
-        lottie.animate().translationY(1500f).setDuration(1000).startDelay = 8000
+        lottie.animate().translationY(1500f).setDuration(6000).startDelay = 6000
 
         lifecycleScope.launch(Dispatchers.Default){
             intent()
         }
-        val fadeInAnimation = AnimationUtils.loadAnimation(this, R.anim.fade_in)
-        logo.startAnimation(fadeInAnimation)
+
     }
     private suspend fun intent(){
-        delay(8000L)
-        startActivity(Intent(this, MainActivity::class.java))
+        delay(6000L)
+        val fadeInAnimation = AnimationUtils.loadAnimation(this, R.anim.fade_in)
+        logo.startAnimation(fadeInAnimation)
+        startActivity(Intent(this, LoginActivity::class.java))
         finish()
     }
 
