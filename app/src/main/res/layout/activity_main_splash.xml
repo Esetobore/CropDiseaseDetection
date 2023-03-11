@@ -8,20 +8,22 @@
     tools:context=".MainSplash">
 
 
-    <ImageView
-        android:id="@+id/logo"
-        android:layout_width="289dp"
-        android:layout_height="264dp"
-        app:srcCompat="@drawable/app_icon_png"
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/logo_splash"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        app:lottie_autoPlay="true"
+        app:lottie_rawRes="@raw/agro"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="70dp"/>
+        android:layout_marginTop="50dp" />
 
     <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/lottie"
+        android:id="@+id/lottie_plant"
         android:layout_width="300dp"
+        android:layout_marginTop="30dp"
         android:layout_height="300dp"
         android:layout_centerHorizontal="true"
         app:lottie_autoPlay="true"
-        android:layout_below="@id/logo"
+        android:layout_below="@id/logo_splash"
         app:lottie_rawRes="@raw/plant"/>
 </RelativeLayout>
