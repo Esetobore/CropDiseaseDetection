@@ -3,16 +3,19 @@ package com.example.cropdiseasedetection
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
-import com.google.firebase.auth.FirebaseAuth
+import com.example.cropdiseasedetection.utils.Constants.Companion.auth
 import kotlinx.android.synthetic.main.activity_reset_password.*
 
 class ResetPassword : AppCompatActivity() {
-    private lateinit var auth : FirebaseAuth
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_reset_password)
 
-        auth = FirebaseAuth.getInstance()
+        login_tv_return.setOnClickListener {
+            onBackPressed()
+        }
+
         reset_btn.setOnClickListener {
         val emailReset = email_editText_reset.text.toString()
             auth.sendPasswordResetEmail(emailReset)
