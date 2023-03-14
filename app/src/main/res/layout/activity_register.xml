@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginActivity">
+    tools:context=".firebaseservices.LoginActivity">
 
     <ImageView
         android:id="@+id/logo_login_activity"
@@ -216,11 +216,21 @@
         style="?android:attr/progressBarStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/login_btn"
+        android:layout_below="@id/register_btn"
         android:layout_marginTop="60dp"
         android:visibility="invisible"
         android:layout_centerHorizontal="true"
         />
+    <TextView
+        android:id="@+id/toast_register"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:layout_below="@id/register_into_your_account"
+        android:textColor="#FF0E0E"
+        android:textStyle="bold"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="10dp" />
 
 
 </RelativeLayout>

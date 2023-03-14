@@ -1,8 +1,9 @@
-package com.example.cropdiseasedetection
+package com.example.cropdiseasedetection.firebaseservices
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import com.example.cropdiseasedetection.R
 import com.example.cropdiseasedetection.utils.Constants.Companion.auth
 import kotlinx.android.synthetic.main.activity_reset_password.*
 
