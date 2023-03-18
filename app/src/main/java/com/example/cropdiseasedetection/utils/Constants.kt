@@ -9,7 +9,7 @@ class Constants {
     companion object{
         val auth : FirebaseAuth = FirebaseAuth.getInstance()
         val databaseReference = FirebaseDatabase.getInstance().getReference("Users")
-        val passMin = 9
+        val PASSMIN = 9
         const val PREF_PASSWORD_ATTEMPTS = "pref_password_attempts"
     }
     object Utils {

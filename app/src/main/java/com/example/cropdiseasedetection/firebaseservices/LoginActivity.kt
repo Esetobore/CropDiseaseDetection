@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import com.example.cropdiseasedetection.MainActivity
 import com.example.cropdiseasedetection.R
 import com.example.cropdiseasedetection.utils.Constants.Companion.PREF_PASSWORD_ATTEMPTS
@@ -17,7 +18,7 @@ class LoginActivity : AppCompatActivity() {
         setContentView(R.layout.activity_login)
 
         login_btn.setOnClickListener {
-            loginUser()
+           startActivity(Intent(this, MainActivity::class.java))
         }
         signup_tv.setOnClickListener {
             startActivity(Intent(this, RegisterActivity::class.java))
@@ -43,26 +44,27 @@ class LoginActivity : AppCompatActivity() {
         // check if the password attempt count exceeds the maximum limit
         val MAX_PASSWORD_ATTEMPTS = 6
         if (email.isEmpty()){
+            Toast.makeText(this, "Please Enter Email", Toast.LENGTH_SHORT).show()
             val m1 = "Please Enter email"
             toast_login.text = m1
-            progressBar_login.visibility = View.INVISIBLE
+            progressBar_login.visibility = View.GONE
         }
         if (password.isEmpty()){
             val m2 = "Please Enter password"
             toast_login.text = m2
-            progressBar_login.visibility = View.INVISIBLE
+            progressBar_login.visibility = View.GONE
 
         }
         if (password.isEmpty() && email.isEmpty()){
             val m3 = "Please Fill in the Empty Spaces"
             toast_login.text = m3
-            progressBar_login.visibility = View.INVISIBLE
+            progressBar_login.visibility = View.GONE
         }
         if (passwordAttempts >= MAX_PASSWORD_ATTEMPTS) {
             val m4 = "Check if Info Entered is Correct"
             toast_login.text = m4
             reset_txt.visibility = View.VISIBLE
-            progressBar_login.visibility = View.INVISIBLE
+            progressBar_login.visibility = View.GONE
         }
 
         auth.signInWithEmailAndPassword(email,password)
@@ -70,6 +72,14 @@ class LoginActivity : AppCompatActivity() {
                 if (task.isSuccessful){
                     showToast(this, "Registration Successful")
                     startActivity(Intent(this, MainActivity::class.java))
+                    progressBar_login.visibility = View.GONE
+                }
+                else{
+                    Toast.makeText(
+                        applicationContext, "Login failed!!" + " Please try again later",
+                        Toast.LENGTH_LONG).show()
+                    // hide the progress bar
+                    progressBar_login.visibility = View.GONE
                 }
             }.addOnFailureListener {
                 progressBar_login.visibility = View.GONE
