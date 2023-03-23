@@ -22,7 +22,7 @@
     app:fabCradleMargin="10dp"
     app:fabCradleVerticalOffset="8dp"
     app:fabCradleRoundedCornerRadius="60dp"
-    android:backgroundTint="#2D5025">
+    android:backgroundTint="@color/appTheme2">
     
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/chip_app_nav_bar"

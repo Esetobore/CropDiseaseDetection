@@ -178,7 +178,7 @@
         android:layout_height="wrap_content"
         android:text=""
         android:layout_below="@id/login_into_your_account"
-        android:textColor="#FF0E0E"
+        android:textColor="@color/errorColor"
         android:textStyle="bold"
         android:layout_marginTop="10dp"
         android:layout_marginStart="10dp" />
