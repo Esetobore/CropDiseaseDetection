@@ -8,7 +8,8 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="appTheme1">#182153</color>
-    <color name="appTheme2">#2D5025</color>
+    <color name="appTheme2">#396330</color>
     <color name="errorColor">#FF0E0E</color>
+    <color name="profile_layout">#447804</color>
 
 </resources>

@@ -6,42 +6,40 @@
     android:layout_height="match_parent">
 
 
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/profile_layout"
+    android:background="@drawable/profile_layout_design">
 
-        <de.hdodenhof.circleimageview.CircleImageView
+    <ImageView
+        android:id="@+id/edit_profile_view"
+        android:layout_width="37dp"
+        android:layout_height="35dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:src="@drawable/edit" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/profile"
             android:layout_width="180dp"
             android:layout_height="180dp"
             android:src="@drawable/profile"
             app:civ_border_width="8dp"
-            app:civ_border_color="#68B83B"
+            app:civ_border_color="@color/white"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="70dp"
             android:layout_marginBottom="10dp"
             />
-
-    <TextView
-        android:id="@+id/TextviewFN_profile"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/profile"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp"
-        android:text="Full Name"
-        android:textColor="@color/black"
-        android:textSize="16sp"
-        android:textStyle="bold" />
-    <androidx.cardview.widget.CardView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/TextviewFN_profile"
-        android:layout_centerHorizontal="true"
-        android:id="@+id/FNCard_view_Profile"
-        android:elevation="7dp"
-        app:cardCornerRadius="5dp"
-        app:cardBackgroundColor="@color/appTheme1">
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/profile"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="19dp"
             android:orientation="horizontal">
             <TextView
                 android:layout_width="wrap_content"
@@ -63,19 +61,23 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginEnd="10dp"/>
         </LinearLayout>
-    </androidx.cardview.widget.CardView>
+</RelativeLayout>
+
 
     <TextView
         android:id="@+id/TextviewEmail_Profile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/FNCard_view_Profile"
+        android:layout_below="@+id/profile_layout"
         android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
         android:layout_marginTop="30dp"
-        android:text="Email"
+        android:layout_marginBottom="5dp"
+        android:text=" Email"
         android:textColor="@color/black"
         android:textSize="16sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        app:drawableStartCompat="@drawable/ic_email" />
     <androidx.cardview.widget.CardView
         android:id="@+id/profile_email_card"
         android:layout_width="wrap_content"
@@ -84,7 +86,7 @@
         android:layout_centerHorizontal="true"
         android:elevation="7dp"
         app:cardCornerRadius="5dp"
-        app:cardBackgroundColor="@color/appTheme1">
+        app:cardBackgroundColor="@color/appTheme2">
         <TextView
             android:id="@+id/profile_email"
             android:layout_width="wrap_content"
@@ -104,11 +106,14 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/profile_email_card"
         android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
         android:layout_marginTop="30dp"
         android:text="Phone Number"
+        android:layout_marginBottom="5dp"
         android:textColor="@color/black"
         android:textSize="16sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        app:drawableStartCompat="@drawable/ic_phone_android" />
 
     <androidx.cardview.widget.CardView
         android:layout_width="wrap_content"
@@ -116,7 +121,7 @@
         android:layout_below="@+id/bio_current_user_profile"
         android:layout_centerHorizontal="true"
         android:elevation="7dp"
-        app:cardBackgroundColor="@color/appTheme1"
+        app:cardBackgroundColor="@color/appTheme2"
         app:cardCornerRadius="5dp">
         <TextView
             android:id="@+id/profile_phone_number"
@@ -130,5 +135,14 @@
             android:layout_marginEnd="8dp"/>
 
     </androidx.cardview.widget.CardView>
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="330dp"
+    android:layout_alignParentBottom="true"
+    android:layout_marginBottom="40dp"
+    android:padding="10dp">
+
+</LinearLayout>
 
 </RelativeLayout>
