@@ -34,12 +34,8 @@
         -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="YOUR_API_KEY" />
+            android:value="AIzaSyDU-TdXQublzZxJpIknUaVgpHUYlbpTKTc" />
 
-        <activity
-            android:name=".ProfileMapsActivity"
-            android:exported="false"
-            android:label="@string/title_activity_profile_maps" />
         <activity
             android:name=".firebaseservices.ResetPassword"
             android:exported="false" />

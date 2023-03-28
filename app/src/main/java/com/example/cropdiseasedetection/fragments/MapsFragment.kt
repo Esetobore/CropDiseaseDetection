@@ -1,11 +1,18 @@
-package com.example.cropdiseasedetection
+package com.example.cropdiseasedetection.fragments
 
+import android.content.pm.PackageManager
+import android.location.Location
 import androidx.fragment.app.Fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.app.ActivityCompat
+import com.example.cropdiseasedetection.R
+import com.example.cropdiseasedetection.utils.Constants.Companion.REQUESTCODE
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -14,7 +21,10 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 
-class ProfileMapsFragment : Fragment() {
+class MapsFragment : Fragment() {
+    private lateinit var currentLocation : Location
+    private lateinit var fuseLocationProviderClient : FusedLocationProviderClient
+
 
     private val callback = OnMapReadyCallback { googleMap ->
         /**
@@ -31,17 +41,26 @@ class ProfileMapsFragment : Fragment() {
         googleMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_profile_maps, container, false)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        return inflater.inflate(R.layout.fragment_maps, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
         mapFragment?.getMapAsync(callback)
+        fuseLocationProviderClient = LocationServices.getFusedLocationProviderClient(requireActivity())
+
+        checkLocationPermission()
+    }
+    private fun checkLocationPermission(){
+        if (ActivityCompat.checkSelfPermission(
+                requireActivity(),android.Manifest.permission.ACCESS_FINE_LOCATION)!=
+                    PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                requireActivity(),android.Manifest.permission.ACCESS_COARSE_LOCATION
+                    )!=PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(requireActivity(), arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),REQUESTCODE)
+            return
+        }
     }
 }

@@ -11,6 +11,8 @@ class Constants {
         val databaseReference = FirebaseDatabase.getInstance().getReference("Users")
         val PASSMIN = 9
         const val PREF_PASSWORD_ATTEMPTS = "pref_password_attempts"
+        val MY_API_KEY = "AIzaSyBgefUB3ma_DGEHzSGkFnKUBdEHOM2HmY8"
+        val REQUESTCODE = 101
     }
     object Utils {
         fun showToast(mContext: Context?, message: String?) {

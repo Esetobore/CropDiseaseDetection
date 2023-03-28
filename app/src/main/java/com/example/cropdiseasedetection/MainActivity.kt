@@ -15,6 +15,7 @@ import androidx.fragment.app.Fragment
 import com.example.cropdiseasedetection.databinding.ActivityMainBinding
 import com.example.cropdiseasedetection.fragments.HomeFragment
 import com.example.cropdiseasedetection.fragments.ProfileFragment
+import com.example.cropdiseasedetection.utils.Constants.Companion.REQUESTCODE
 import com.example.cropdiseasedetection.utils.Constants.Utils.showToast
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -110,7 +111,7 @@ class MainActivity : AppCompatActivity() {
             startActivityForResult(cameraIntent, 1)
         } else {
             //Request camera permission if we don't have it.
-            requestPermissions(arrayOf(android.Manifest.permission.CAMERA), 100)
+            requestPermissions(arrayOf(android.Manifest.permission.CAMERA), REQUESTCODE)
         }
     }
 
