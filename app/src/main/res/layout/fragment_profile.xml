@@ -143,9 +143,10 @@
     android:layout_marginBottom="40dp"
     android:padding="10dp">
     <FrameLayout
+        android:id="@+id/frame_layout_profile_map"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:name=""/>
+        />
 </LinearLayout>
 
 </RelativeLayout>

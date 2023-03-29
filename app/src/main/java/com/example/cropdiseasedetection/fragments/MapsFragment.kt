@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import androidx.core.app.ActivityCompat
 import com.example.cropdiseasedetection.R
 import com.example.cropdiseasedetection.utils.Constants.Companion.REQUESTCODE
+import com.example.cropdiseasedetection.utils.Constants.Utils.showToast
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 
@@ -27,18 +28,14 @@ class MapsFragment : Fragment() {
 
 
     private val callback = OnMapReadyCallback { googleMap ->
-        /**
-         * Manipulates the map once available.
-         * This callback is triggered when the map is ready to be used.
-         * This is where we can add markers or lines, add listeners or move the camera.
-         * In this case, we just add a marker near Sydney, Australia.
-         * If Google Play services is not installed on the device, the user will be prompted to
-         * install it inside the SupportMapFragment. This method will only be triggered once the
-         * user has installed Google Play services and returned to the app.
-         */
-        val sydney = LatLng(-34.0, 151.0)
-        googleMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
-        googleMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
+
+        val latLng = LatLng(currentLocation.latitude, currentLocation.longitude)
+        val markerOptions = MarkerOptions().position(latLng).title("Current Location")
+
+        googleMap!!.animateCamera(CameraUpdateFactory.newLatLng(latLng))
+        googleMap!!.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng,7f))
+        googleMap!!.addMarker(markerOptions)
+
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -47,20 +44,39 @@ class MapsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
-        mapFragment?.getMapAsync(callback)
+
         fuseLocationProviderClient = LocationServices.getFusedLocationProviderClient(requireActivity())
 
-        checkLocationPermission()
+        getLocationPermission()
+
+
     }
-    private fun checkLocationPermission(){
-        if (ActivityCompat.checkSelfPermission(
-                requireActivity(),android.Manifest.permission.ACCESS_FINE_LOCATION)!=
-                    PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
-                requireActivity(),android.Manifest.permission.ACCESS_COARSE_LOCATION
-                    )!=PackageManager.PERMISSION_GRANTED){
+    private fun getLocationPermission(){
+        val checkPermission = ActivityCompat.checkSelfPermission(requireActivity(),android.Manifest.permission.ACCESS_FINE_LOCATION)!= PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+            requireActivity(),android.Manifest.permission.ACCESS_COARSE_LOCATION)!=PackageManager.PERMISSION_GRANTED
+        if (checkPermission){
             ActivityCompat.requestPermissions(requireActivity(), arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),REQUESTCODE)
-            return
+        }
+
+        val task = fuseLocationProviderClient.lastLocation.addOnSuccessListener { location ->
+            if (location != null){
+                currentLocation = location
+                showToast(activity,currentLocation.latitude.toString() + "" + currentLocation.longitude.toString())
+                val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
+                mapFragment?.getMapAsync(callback)
+            }
         }
     }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        when(requestCode){
+                REQUESTCODE-> if (grantResults.isNotEmpty() &&  grantResults[0]== PackageManager.PERMISSION_GRANTED){
+                    getLocationPermission()
+                }
+        }
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+    }
+
+
+
 }

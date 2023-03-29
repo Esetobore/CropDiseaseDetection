@@ -18,5 +18,8 @@ class Constants {
         fun showToast(mContext: Context?, message: String?) {
             Toast.makeText(mContext, message, Toast.LENGTH_LONG).show()
         }
+        fun showToastShort(mContext: Context?, message: String?) {
+            Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show()
+        }
     }
 }
