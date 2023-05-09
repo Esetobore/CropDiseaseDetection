@@ -86,6 +86,5 @@ class LoginActivity : AppCompatActivity() {
             reset_txt.visibility = View.VISIBLE
             progressBar_login.visibility = View.GONE
         }
-
     }
 }
