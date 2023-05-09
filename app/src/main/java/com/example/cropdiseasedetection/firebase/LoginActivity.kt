@@ -1,8 +1,9 @@
-package com.example.cropdiseasedetection.firebaseservices
+package com.example.cropdiseasedetection.firebase
 import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import com.example.cropdiseasedetection.MainActivity
@@ -13,12 +14,33 @@ import com.example.cropdiseasedetection.utils.Constants.Utils.showToast
 import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : AppCompatActivity() {
+    private val email = email_editText_login.text.toString()
+    private val password = password_edt_login.text.toString()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
         login_btn.setOnClickListener {
-           startActivity(Intent(this, MainActivity::class.java))
+           loginUser()
+            auth.signInWithEmailAndPassword(email,password)
+                .addOnCompleteListener { task->
+                    if (task.isSuccessful){
+                        showToast(this, "Login Successful")
+                        startActivity(Intent(this, MainActivity::class.java))
+                        progressBar_login.visibility = View.GONE
+                    }
+                    else{
+                        Toast.makeText(
+                            applicationContext, "Login failed!!" + " Please try again",
+                            Toast.LENGTH_LONG).show()
+                        // hide the progress bar
+                        progressBar_login.visibility = View.GONE
+                    }
+                }.addOnFailureListener {error->
+                    progressBar_login.visibility = View.GONE
+                    showToast(this,"Error")
+                    Log.i("FIREBASE", "error:$error")
+                }
         }
         signup_tv.setOnClickListener {
             startActivity(Intent(this, RegisterActivity::class.java))
@@ -29,8 +51,6 @@ class LoginActivity : AppCompatActivity() {
 
     }
     private fun loginUser(){
-        val email = email_editText_login.text.toString()
-        val password = password_edt_login.text.toString()
         progressBar_login.visibility = View.VISIBLE
         // get the shared preference instance
         val sharedPref = getPreferences(Context.MODE_PRIVATE)
@@ -67,23 +87,6 @@ class LoginActivity : AppCompatActivity() {
             progressBar_login.visibility = View.GONE
         }
 
-        auth.signInWithEmailAndPassword(email,password)
-            .addOnCompleteListener { task->
-                if (task.isSuccessful){
-                    showToast(this, "Registration Successful")
-                    startActivity(Intent(this, MainActivity::class.java))
-                    progressBar_login.visibility = View.GONE
-                }
-                else{
-                    Toast.makeText(
-                        applicationContext, "Login failed!!" + " Please try again later",
-                        Toast.LENGTH_LONG).show()
-                    // hide the progress bar
-                    progressBar_login.visibility = View.GONE
-                }
-            }.addOnFailureListener {
-                progressBar_login.visibility = View.GONE
-                showToast(this,"Error")
-            }
+
     }
 }

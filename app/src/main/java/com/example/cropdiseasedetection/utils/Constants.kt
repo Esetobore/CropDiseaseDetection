@@ -4,15 +4,17 @@ import android.content.Context
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.storage.StorageReference
 
 class Constants {
     companion object{
         val auth : FirebaseAuth = FirebaseAuth.getInstance()
         val databaseReference = FirebaseDatabase.getInstance().getReference("Users")
-        val PASSMIN = 9
+        var uid : String = ""
+        const val PASSMIN = 9
         const val PREF_PASSWORD_ATTEMPTS = "pref_password_attempts"
         val MY_API_KEY = "AIzaSyBgefUB3ma_DGEHzSGkFnKUBdEHOM2HmY8"
-        val REQUESTCODE = 101
+        const val REQUESTCODE = 101
     }
     object Utils {
         fun showToast(mContext: Context?, message: String?) {

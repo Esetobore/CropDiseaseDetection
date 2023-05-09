@@ -1,4 +1,4 @@
-package com.example.cropdiseasedetection.firebaseservices
+package com.example.cropdiseasedetection.firebase
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

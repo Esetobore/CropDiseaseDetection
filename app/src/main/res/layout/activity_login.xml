@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".firebaseservices.LoginActivity">
+    tools:context=".firebase.LoginActivity">
 
     <ImageView
         android:id="@+id/logo_login_activity"
@@ -50,6 +50,8 @@
                 android:id="@+id/email_editText_login"
                 android:layout_width="match_parent"
                 android:textSize="20sp"
+                android:ems="10"
+                android:inputType="textEmailAddress"
                 android:textColor="@color/black"
                 android:layout_height="wrap_content"/>
         </LinearLayout>

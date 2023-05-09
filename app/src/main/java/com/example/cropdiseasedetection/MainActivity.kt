@@ -29,32 +29,38 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-            permissionLauncher = registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()){ permission ->
-            isReadPermissionGranted = permission[Manifest.permission.READ_EXTERNAL_STORAGE] ?: isReadPermissionGranted
-            isRecordPermissionGranted = permission[Manifest.permission.RECORD_AUDIO] ?: isRecordPermissionGranted
-            isLocationPermissionGranted = permission[Manifest.permission.ACCESS_FINE_LOCATION] ?: isLocationPermissionGranted
-            isCameraPermissionGranted = permission[Manifest.permission.CAMERA] ?: isCameraPermissionGranted }
+            manifestPermissions()
             requestPermission()
 
         chip_app_nav_bar.menu.getItem(1).isEnabled = false
         chip_app_nav_bar.menu.getItem(2).isEnabled = false
         chip_app_nav_bar.background = null
+
         replaceFragment(HomeFragment())
-        chip_app_nav_bar.setOnClickListener {
-            when(it.id){
+        chip_app_nav_bar.setOnItemSelectedListener {
+            when(it.itemId){
                 R.id.bmHome -> replaceFragment(HomeFragment())
+
                 R.id.bmUser -> replaceFragment(ProfileFragment())
 
                 else ->{
                     showToast(this,"Error Exception")
                 }
+
             }
-           // true
+            true
+
         }
         floating_button_camera.setOnClickListener {
             cameraView()
         }
 
+    }
+    private fun replaceFragment(fragment: Fragment){
+        val fragmentManager = supportFragmentManager
+        val fragmentTransaction = fragmentManager.beginTransaction()
+        fragmentTransaction.replace(R.id.root_layout,fragment)
+        fragmentTransaction.commit()
     }
     private fun requestPermission(){
         isReadPermissionGranted = ContextCompat.checkSelfPermission(
@@ -96,13 +102,8 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun replaceFragment(fragment: Fragment){
-        val fragmentManager = supportFragmentManager
-        val fragmentTransaction = fragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.root_layout,fragment)
-        fragmentTransaction.commit()
-    }
-    fun cameraView(){
+
+    private fun cameraView(){
         // Check camera permission if we have it.
         val checkSelfPermission = ActivityCompat.checkSelfPermission(this, android.Manifest.permission.CAMERA)==
                 PackageManager.PERMISSION_GRANTED
@@ -113,6 +114,14 @@ class MainActivity : AppCompatActivity() {
             //Request camera permission if we don't have it.
             requestPermissions(arrayOf(android.Manifest.permission.CAMERA), REQUESTCODE)
         }
+    }
+
+    private fun manifestPermissions(){
+        permissionLauncher = registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()){ permission ->
+            isReadPermissionGranted = permission[Manifest.permission.READ_EXTERNAL_STORAGE] ?: isReadPermissionGranted
+            isRecordPermissionGranted = permission[Manifest.permission.RECORD_AUDIO] ?: isRecordPermissionGranted
+            isLocationPermissionGranted = permission[Manifest.permission.ACCESS_FINE_LOCATION] ?: isLocationPermissionGranted
+            isCameraPermissionGranted = permission[Manifest.permission.CAMERA] ?: isCameraPermissionGranted }
     }
 
 }

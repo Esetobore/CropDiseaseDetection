@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".firebaseservices.LoginActivity">
+    tools:context=".firebase.LoginActivity">
 
     <ImageView
         android:id="@+id/logo_login_activity"
@@ -50,6 +50,7 @@
                 android:id="@+id/firstname_et_register"
                 android:layout_width="match_parent"
                 android:textSize="20sp"
+                android:inputType="textPersonName"
                 android:textColor="@color/black"
                 android:layout_height="wrap_content"/>
         </LinearLayout>
@@ -80,6 +81,7 @@
                 android:id="@+id/lastname_et_register"
                 android:layout_width="match_parent"
                 android:textSize="20sp"
+                android:inputType="textPersonName"
                 android:textColor="@color/black"
                 android:layout_height="wrap_content"/>
         </LinearLayout>
@@ -110,6 +112,7 @@
                 android:id="@+id/email_editText_register"
                 android:layout_width="match_parent"
                 android:textSize="20sp"
+                android:inputType="textEmailAddress"
                 android:textColor="@color/black"
                 android:layout_height="wrap_content"/>
         </LinearLayout>
@@ -164,14 +167,7 @@
         android:layout_marginEnd="130dp"
         android:scaleType="fitXY"
         android:src="@drawable/leaf_png" />
-<!--    <ImageView-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="718dp"-->
-<!--        android:layout_below="@id/password_card_view"-->
-<!--        android:layout_marginTop="95dp"-->
-<!--        android:layout_marginStart="100dp"-->
-<!--        android:scaleType="fitXY"-->
-<!--        android:src="@drawable/leaf2_png" />-->
+
 
 
     <Button
@@ -227,6 +223,7 @@
         android:layout_height="wrap_content"
         android:text=""
         android:layout_below="@id/register_into_your_account"
+        android:layout_above="@id/first_name_card_view_RegAct"
         android:textColor="#FF0E0E"
         android:textStyle="bold"
         android:layout_marginTop="10dp"

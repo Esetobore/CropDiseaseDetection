@@ -1,8 +1,9 @@
-package com.example.cropdiseasedetection.firebaseservices
+package com.example.cropdiseasedetection.firebase
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import com.example.cropdiseasedetection.MainActivity
 import com.example.cropdiseasedetection.R
@@ -70,9 +71,10 @@ class RegisterActivity : AppCompatActivity() {
                 else {
                     showToast(this, "Error")
                 }
-            }.addOnFailureListener {
+            }.addOnFailureListener {error->
                 progressBar_register.visibility = View.GONE
-                showToast(this, "Error: $it")
+                showToast(this, "Error")
+                Log.i("FIREBASE", "error:$error")
             }
     }
 
