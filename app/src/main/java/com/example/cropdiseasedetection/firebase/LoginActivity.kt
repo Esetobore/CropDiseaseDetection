@@ -87,6 +87,5 @@ class LoginActivity : AppCompatActivity() {
             progressBar_login.visibility = View.GONE
         }
 
-
     }
 }
