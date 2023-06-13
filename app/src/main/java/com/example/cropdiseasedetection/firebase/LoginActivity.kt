@@ -14,33 +14,13 @@ import com.example.cropdiseasedetection.utils.Constants.Utils.showToast
 import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : AppCompatActivity() {
-    private val email = email_editText_login.text.toString()
-    private val password = password_edt_login.text.toString()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
         login_btn.setOnClickListener {
            loginUser()
-            auth.signInWithEmailAndPassword(email,password)
-                .addOnCompleteListener { task->
-                    if (task.isSuccessful){
-                        showToast(this, "Login Successful")
-                        startActivity(Intent(this, MainActivity::class.java))
-                        progressBar_login.visibility = View.GONE
-                    }
-                    else{
-                        Toast.makeText(
-                            applicationContext, "Login failed!!" + " Please try again",
-                            Toast.LENGTH_LONG).show()
-                        // hide the progress bar
-                        progressBar_login.visibility = View.GONE
-                    }
-                }.addOnFailureListener {error->
-                    progressBar_login.visibility = View.GONE
-                    showToast(this,"Error")
-                    Log.i("FIREBASE", "error:$error")
-                }
         }
         signup_tv.setOnClickListener {
             startActivity(Intent(this, RegisterActivity::class.java))
@@ -51,6 +31,8 @@ class LoginActivity : AppCompatActivity() {
 
     }
     private fun loginUser(){
+        val email = email_editText_login.text.toString().trim()
+        val password = password_edt_login.text.toString().trim()
         progressBar_login.visibility = View.VISIBLE
         // get the shared preference instance
         val sharedPref = getPreferences(Context.MODE_PRIVATE)
@@ -62,7 +44,8 @@ class LoginActivity : AppCompatActivity() {
             putInt(PREF_PASSWORD_ATTEMPTS, passwordAttempts)
             apply() }
         // check if the password attempt count exceeds the maximum limit
-        val MAX_PASSWORD_ATTEMPTS = 6
+        val MAX_PASSWORD_ATTEMPTS = 20
+
         if (email.isEmpty()){
             Toast.makeText(this, "Please Enter Email", Toast.LENGTH_SHORT).show()
             val m1 = "Please Enter email"
@@ -70,7 +53,7 @@ class LoginActivity : AppCompatActivity() {
             progressBar_login.visibility = View.GONE
         }
         if (password.isEmpty()){
-            val m2 = "Please Enter password"
+            val m2 = "Wrong password"
             toast_login.text = m2
             progressBar_login.visibility = View.GONE
 
@@ -85,6 +68,19 @@ class LoginActivity : AppCompatActivity() {
             toast_login.text = m4
             reset_txt.visibility = View.VISIBLE
             progressBar_login.visibility = View.GONE
+            TODO("Find a way to reset the counter for the password attempt after they leave this activity")
         }
+        auth.signInWithEmailAndPassword(email,password)
+            .addOnCompleteListener { task->
+                if (task.isSuccessful){
+                    Log.i("FIREBASE", "Login Successful")
+                    startActivity(Intent(this, MainActivity::class.java))
+                    progressBar_login.visibility = View.GONE
+                }
+            }.addOnFailureListener {error->
+                progressBar_login.visibility = View.GONE
+                showToast(this,"Failed to Login")
+                Log.i("FIREBASE", "Error:$error")
+            }
     }
 }

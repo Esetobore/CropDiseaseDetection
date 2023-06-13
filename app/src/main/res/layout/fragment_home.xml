@@ -14,6 +14,31 @@
         android:textStyle="bold"
         android:textColor="@color/black"
         />
+    <Button
+        android:id="@+id/homefrag_identified"
+        android:layout_width="wrap_content"
+        android:layout_height="70dp"
+        android:layout_marginStart="210dp"
+        android:backgroundTint="@color/white"
+        android:background="@drawable/btn_border"
+        android:text="Identified"
+        android:layout_marginTop="50dp"
+        android:textColor="@color/appTheme1"
+        android:textSize="20sp"/>
+    <Button
+        android:id="@+id/homefrag_unidentified"
+        android:layout_width="wrap_content"
+        android:layout_height="70dp"
+        android:layout_marginStart="210dp"
+        android:backgroundTint="@color/white"
+        android:background="@drawable/btn_border"
+        android:text="Unidentified"
+        android:layout_below="@+id/homefrag_identified"
+        android:layout_marginTop="50dp"
+        android:textColor="@color/appTheme1"
+        android:textSize="20sp"/>
+
+
 
 
 

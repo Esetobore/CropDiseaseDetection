@@ -120,7 +120,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="15dp"
         android:textColor="@color/white"
-        android:backgroundTint="#182153"
+        android:backgroundTint="@color/appTheme1"
         android:text="Sign In"
         app:cornerRadius="8dp" />
     <androidx.appcompat.widget.LinearLayoutCompat

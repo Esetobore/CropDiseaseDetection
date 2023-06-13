@@ -11,5 +11,7 @@
     <color name="appTheme2">#396330</color>
     <color name="errorColor">#FF0E0E</color>
     <color name="profile_layout">#447804</color>
+    <color name="disease_name">#508E04</color>
+    <color name="disease_text">#243178</color>
 
 </resources>

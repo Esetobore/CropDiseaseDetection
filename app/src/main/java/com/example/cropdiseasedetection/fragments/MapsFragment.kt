@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 
 import android.os.Bundle
 import android.os.Looper
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -68,7 +69,7 @@ class MapsFragment : Fragment() , LocationListener, OnMapReadyCallback, Location
         val task = fuseLocationProviderClient.lastLocation.addOnSuccessListener { location ->
             if (location != null){
                 currentLocation = location
-                showToast(activity,currentLocation.latitude.toString() + "" + currentLocation.longitude.toString())
+                Log.e("MAP LOCATION",currentLocation.latitude.toString() + "" + currentLocation.longitude.toString())
                 val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
                 mapFragment?.getMapAsync(this)
             }
